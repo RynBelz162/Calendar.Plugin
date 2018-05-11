@@ -1,4 +1,4 @@
-﻿namespace Plugin.Calendar.Plugin.Shared
+﻿namespace Calendar.Plugin.Shared
 {
 	public enum DateTypeEnum
 	{

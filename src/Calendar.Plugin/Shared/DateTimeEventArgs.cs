@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Plugin.Calendar.Plugin.Shared
+namespace Calendar.Plugin.Shared
 {
 	public class DateTimeEventArgs : EventArgs
 	{

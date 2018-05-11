@@ -2,9 +2,9 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard1.0;netstandard2.0;MonoAndroid80;Xamarin.iOS10;</TargetFrameworks>
-		<AssemblyName>Plugin.Calendar.Plugin</AssemblyName>
-		<RootNamespace>Plugin.Calendar.Plugin</RootNamespace>
-		<PackageId>Plugin.Calendar.Plugin</PackageId>
+		<AssemblyName>Calendar.Plugin</AssemblyName>
+		<RootNamespace>Calendar.Plugin</RootNamespace>
+		<PackageId>Calendar.Plugin</PackageId>
 
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -39,7 +39,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.0" PrivateAssets="All" />
-		<PackageReference Include="Xamarin.Forms" Version="2.5.1.527436" />
+		<PackageReference Include="Xamarin.Forms" Version="2.5.0.91635" />
 		<Compile Include="Shared\**\*.cs" />
 	</ItemGroup>
 

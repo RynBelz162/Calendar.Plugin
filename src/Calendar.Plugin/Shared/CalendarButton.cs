@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace Plugin.Calendar.Plugin.Shared
+namespace Calendar.Plugin.Shared
 {
 	public class CalendarButton : Button
 	{

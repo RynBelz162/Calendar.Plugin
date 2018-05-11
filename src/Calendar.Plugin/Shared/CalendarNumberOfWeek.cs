@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace Plugin.Calendar.Plugin.Shared
+namespace Calendar.Plugin.Shared
 {
 	public partial class Calendar : ContentView
 	{
@@ -64,7 +64,7 @@ namespace Plugin.Calendar.Plugin.Shared
 		protected void ChangeNumberOfWeekFontSize(double newValue, double oldValue)
 		{
 			if (Math.Abs(newValue - oldValue) < 0.01) return;
-			_weekNumbers?.ForEach((obj) => obj.WidthRequest = newValue * (Device.RuntimePlatform == Device.iOS ? 1.5 : 2.2));
+			_weekNumbers?.ForEach(obj => obj.WidthRequest = newValue * (Device.RuntimePlatform == Device.iOS ? 1.5 : 2.2));
 			_weekNumberLabels.ForEach(l => l.FontSize = newValue);
 		}
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace Plugin.Calendar.Plugin.Shared
+namespace Calendar.Plugin.Shared
 {
 	public class SpecialDate
 	{
@@ -37,7 +37,7 @@ namespace Plugin.Calendar.Plugin.Shared
 		protected int Columns;
 		public BackgroundPattern(int columns)
 		{
-			this.Columns = columns;
+			Columns = columns;
 		}
 
 		public List<Pattern> Pattern;

@@ -2,18 +2,18 @@
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Util;
-using Plugin.Calendar.Plugin.Platforms.Android;
-using Plugin.Calendar.Plugin.Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Android.Runtime;
+using Calendar.Plugin.Platforms.Android;
+using Calendar.Plugin.Shared;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Color = Android.Graphics.Color;
 using Math = System.Math;
 
 [assembly: Xamarin.Forms.ExportRenderer(typeof(CalendarButton), typeof(CalendarButtonRenderer))]
-namespace Plugin.Calendar.Plugin.Platforms.Android
+namespace Calendar.Plugin.Platforms.Android
 {
 	[Preserve(AllMembers = true)]
 	public class CalendarButtonRenderer : ButtonRenderer
@@ -151,6 +151,10 @@ namespace Plugin.Calendar.Plugin.Platforms.Android
 
 	public static class Calendar
 	{
+		public static void Init()
+		{
+			var d = "";
+		}
 	}
 
 	public class TextDrawable : ColorDrawable

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace Plugin.Calendar.Plugin.Shared
+namespace Calendar.Plugin.Shared
 {
 	public partial class Calendar : ContentView
 	{

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Plugin.Calendar.Plugin.Shared
+namespace Calendar.Plugin.Shared
 {
 	public partial class Calendar : ContentView
 	{

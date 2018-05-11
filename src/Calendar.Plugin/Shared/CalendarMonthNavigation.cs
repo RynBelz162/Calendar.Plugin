@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Plugin.Calendar.Plugin.Shared
+namespace Calendar.Plugin.Shared
 {
 	public partial class Calendar : ContentView
 	{
@@ -204,13 +204,13 @@ namespace Plugin.Calendar.Plugin.Shared
 			set => TitleLeftArrow.BorderColor = value;
 		}
 
-		public static readonly BindableProperty TitleLeftArrowCornerRadiusProperty = BindableProperty.Create(nameof(TitleLeftArrowCornerRadius), typeof(int), typeof(Calendar), default(int),
-					propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleLeftArrow.CornerRadius = (int)newValue);
+		public static readonly BindableProperty TitleLeftArrowBorderRadiusProperty = BindableProperty.Create(nameof(TitleLeftArrowBorderRadius), typeof(int), typeof(Calendar), default(int),
+					propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleLeftArrow.BorderRadius = (int)newValue);
 
-		public int TitleLeftArrowCornerRadius
+		public int TitleLeftArrowBorderRadius
 		{
-			get => TitleLeftArrow.CornerRadius;
-			set => TitleLeftArrow.CornerRadius = value;
+			get => TitleLeftArrow.BorderRadius;
+			set => TitleLeftArrow.BorderRadius = value;
 		}
 
 		public static readonly BindableProperty TitleLeftArrowImageProperty = BindableProperty.Create(nameof(TitleLeftArrowImage), typeof(FileImageSource), typeof(Calendar), default(FileImageSource),
@@ -330,13 +330,13 @@ namespace Plugin.Calendar.Plugin.Shared
 			set => TitleRightArrow.BorderColor = value;
 		}
 
-		public static readonly BindableProperty TitleRightArrowCornerRadiusProperty = BindableProperty.Create(nameof(TitleRightArrowCornerRadius), typeof(int), typeof(Calendar), default(int),
-					propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleRightArrow.CornerRadius = (int)newValue);
+		public static readonly BindableProperty TitleRightArrowBorderRadiusProperty = BindableProperty.Create(nameof(TitleRightArrowBorderRadius), typeof(int), typeof(Calendar), default(int),
+					propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleRightArrow.BorderRadius = (int)newValue);
 
-		public int TitleRightArrowCornerRadius
+		public int TitleRightArrowBorderRadius
 		{
-			get => TitleRightArrow.CornerRadius;
-			set => TitleRightArrow.CornerRadius = value;
+			get => TitleRightArrow.BorderRadius;
+			set => TitleRightArrow.BorderRadius = value;
 		}
 
 		public static readonly BindableProperty TitleRightArrowImageProperty = BindableProperty.Create(nameof(TitleRightArrowImage), typeof(FileImageSource), typeof(Calendar), default(FileImageSource),

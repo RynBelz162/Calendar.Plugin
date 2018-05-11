@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Plugin.Calendar.Plugin.Shared
+namespace Calendar.Plugin.Shared
 {
 	public partial class Calendar : ContentView
 	{
@@ -181,7 +181,7 @@ namespace Plugin.Calendar.Plugin.Shared
 
 		public static readonly BindableProperty OuterBorderWidthProperty =
 			BindableProperty.Create(nameof(OuterBorderWidth), typeof(int), typeof(Calendar), Device.RuntimePlatform == Device.iOS ? 1 : 3,
-									propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar)._mainCalendars.ForEach((obj) => obj.Padding = (int)newValue));
+									propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar)._mainCalendars.ForEach(obj => obj.Padding = (int)newValue));
 
 		/// <summary>
 		/// Gets or sets the width of the whole calandar border.
@@ -204,7 +204,7 @@ namespace Plugin.Calendar.Plugin.Shared
 		protected void ChangeBorderColor(Color newValue, Color oldValue)
 		{
 			if (newValue == oldValue) return;
-			_mainCalendars.ForEach((obj) => obj.BackgroundColor = newValue);
+			_mainCalendars.ForEach(obj => obj.BackgroundColor = newValue);
 			_buttons.FindAll(b => b.IsEnabled && !b.IsSelected).ForEach(b => b.BorderColor = newValue);
 		}
 
@@ -480,7 +480,7 @@ namespace Plugin.Calendar.Plugin.Shared
 					{
 						_buttons.Add(new CalendarButton
 						{
-							CornerRadius = 0,
+							BorderRadius = 0,
 							BorderWidth = BorderWidth,
 							BorderColor = BorderColor,
 							FontSize = DatesFontSize,
@@ -519,7 +519,7 @@ namespace Plugin.Calendar.Plugin.Shared
 						var tls = StartDate.AddMonths(1);
 						foreach (var tl in _titleLabels)
 						{
-							(tl as Label).Text = tls.ToString(TitleLabelFormat);
+							tl.Text = tls.ToString(TitleLabelFormat);
 							tls = tls.AddMonths(1);
 						}
 					}

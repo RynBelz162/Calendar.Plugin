@@ -1,15 +1,15 @@
 ﻿using CoreGraphics;
-using Plugin.Calendar.Plugin.Platforms.iOS;
-using Plugin.Calendar.Plugin.Shared;
 using System;
 using System.Threading.Tasks;
+using Calendar.Plugin.Platforms.iOS;
+using Calendar.Plugin.Shared;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: Xamarin.Forms.ExportRenderer(typeof(CalendarButton), typeof(CalendarButtonRenderer))]
-namespace Plugin.Calendar.Plugin.Platforms.iOS
+namespace Calendar.Plugin.Platforms.iOS
 {
 	[Preserve(AllMembers = true)]
 	public class CalendarButtonRenderer : ButtonRenderer
