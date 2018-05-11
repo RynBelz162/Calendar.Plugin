@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard1.0;netstandard2.0;MonoAndroid80;Xamarin.iOS10;uap10.0.15063;Xamarin.TVOS10;Xamarin.WatchOS10;Xamarin.Mac20;</TargetFrameworks>
+		<TargetFrameworks>netstandard1.0;netstandard2.0;MonoAndroid80;Xamarin.iOS10;</TargetFrameworks>
 		<AssemblyName>Plugin.Calendar.Plugin</AssemblyName>
 		<RootNamespace>Plugin.Calendar.Plugin</RootNamespace>
 		<PackageId>Plugin.Calendar.Plugin</PackageId>
@@ -26,9 +26,9 @@
 		<RepositoryUrl>LINK TO PROJECT</RepositoryUrl>
 		<PackageReleaseNotes>RELEASE NOTES</PackageReleaseNotes>
 		<PackageIconUrl>ICON URL</PackageIconUrl>
-		<PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, Calendar.Plugin</PackageTags>
+		<PackageTags>xamarin, ios, android, xamarin.forms, plugin, Calendar.Plugin</PackageTags>
 
-		<Title>Calendar.Plugin Plugin for Xamarin and Windows</Title>
+		<Title>Calendar Plugin for Xamarin and Windows</Title>
 		<Summary>Summary of nuget</Summary>
 		<Description>Plugin Description</Description>
 
@@ -39,6 +39,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.0" PrivateAssets="All" />
+		<PackageReference Include="Xamarin.Forms" Version="2.5.1.527436" />
 		<Compile Include="Shared\**\*.cs" />
 	</ItemGroup>
 
@@ -46,11 +47,6 @@
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-	</ItemGroup>
-
-	<ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.15063' ">
-		<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="5.2.3" />
-		<Compile Include="Platforms\UWP\**\*.cs" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
@@ -61,6 +57,28 @@
 		<Compile Include="Platforms\iOS\**\*.cs" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Shared\Calendar.cs" />
+	  <None Remove="Shared\CalendarButton.cs" />
+	  <None Remove="Shared\CalendarChanges.cs" />
+	  <None Remove="Shared\CalendarDisabled.cs" />
+	  <None Remove="Shared\CalendarMonthNavigation.cs" />
+	  <None Remove="Shared\CalendarMonthYearView.cs" />
+	  <None Remove="Shared\CalendarNumberOfWeek.cs" />
+	  <None Remove="Shared\CalendarOutsideMoth.cs" />
+	  <None Remove="Shared\CalendarSelected.cs" />
+	  <None Remove="Shared\CalendarSpecialDates.cs" />
+	  <None Remove="Shared\CalendarWeekdays.cs" />
+	  <None Remove="Shared\DateTimeEventArgs.cs" />
+	  <None Remove="Shared\DateTypeEnum.cs" />
+	  <None Remove="Shared\EnumerableExtensions.cs" />
+	  <None Remove="Shared\SpecialDate.cs" />
+	</ItemGroup>
+
+	<!--<ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.15063' ">
+		<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="5.2.3" />
+		<Compile Include="Platforms\UWP\**\*.cs" />
+	</ItemGroup>-->
 
 	<!--<ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.TVOS10' ">
 		<Compile Include="Platforms\TVOS\**\*.cs" />
@@ -84,7 +102,6 @@
   </ItemGroup>
   -->
 
-
 	<!--
   <ItemGroup Condition=" '$(TargetFramework)' == 'Tizen40' ">
     <Compile Include="Platforms\Tizen\**\*.cs" />
@@ -97,7 +114,6 @@
     <Compile Include="Platforms\DotNet\**\*.cs" />
   </ItemGroup>
   -->
-
 
 
 	<Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
