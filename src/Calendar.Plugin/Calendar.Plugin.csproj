@@ -22,18 +22,18 @@
 
 		<!--TODO: Fill these in-->
 		<PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
-		<PackageProjectUrl>LINK TO PROJECT</PackageProjectUrl>
-		<RepositoryUrl>LINK TO PROJECT</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/RynBelz162/Calendar.Plugin</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/RynBelz162/Calendar.Plugin</RepositoryUrl>
 		<PackageReleaseNotes>RELEASE NOTES</PackageReleaseNotes>
 		<PackageIconUrl>ICON URL</PackageIconUrl>
 		<PackageTags>xamarin, ios, android, xamarin.forms, plugin, Calendar.Plugin</PackageTags>
 
 		<Title>Calendar Plugin for Xamarin and Windows</Title>
 		<Summary>Summary of nuget</Summary>
-		<Description>Plugin Description</Description>
+		<Description>xamarin forms calendar control</Description>
 
-		<Owners>YOU</Owners>
-		<Authors>YOU</Authors>
+		<Owners>Ryan Belz</Owners>
+		<Authors>Ryan Belz</Authors>
 		<Copyright>Copyright 2018</Copyright>
 	</PropertyGroup>
 
