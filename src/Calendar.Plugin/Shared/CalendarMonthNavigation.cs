@@ -461,21 +461,9 @@ namespace Calendar.Plugin.Shared
 
         protected void RightArrowClickedEvent(object s, EventArgs a)
         {
-            if (CalendarViewType == DateTypeEnum.Year)
-            {
-                NextPrevYears(true);
-            }
-            else
-            {
-                NextMonth();
-            }
+            ArrowExecutionSetup(true);
             RightArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
             RightArrowCommand?.Execute(StartDate);
-        }
-
-        public void NextMonth()
-        {
-            StartDate = new DateTime(StartDate.Year, StartDate.Month, 1).AddMonths(ShowNumOfMonths);
         }
 
         #endregion
@@ -493,22 +481,23 @@ namespace Calendar.Plugin.Shared
 
         protected void LeftArrowClickedEvent(object s, EventArgs a)
         {
-            if (CalendarViewType == DateTypeEnum.Year)
-            {
-                NextPrevYears(false);
-            }
-            else
-            {
-                PreviousMonth();
-            }
+            ArrowExecutionSetup(false);
             LeftArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
             LeftArrowCommand?.Execute(StartDate);
         }
-
-        public void PreviousMonth()
-        {
-            StartDate = new DateTime(StartDate.Year, StartDate.Month, 1).AddMonths(-ShowNumOfMonths);
-        }
         #endregion
+
+        public void ArrowExecutionSetup(bool navigatingForwards)
+        {
+            if (CalendarViewType == DateTypeEnum.Year)
+            {
+                NextPrevYears(true);
+            }
+            else
+            {
+                var date = new DateTime(StartDate.Year, StartDate.Month, 1);
+                StartDate = navigatingForwards ? date.AddMonths(ShowNumOfMonths) : date.AddMonths(-ShowNumOfMonths);
+            }
+        }
     }
 }

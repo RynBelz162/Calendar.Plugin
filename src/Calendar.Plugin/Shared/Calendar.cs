@@ -392,6 +392,56 @@ namespace Calendar.Plugin.Shared
 
         #endregion
 
+        #region CalendarSwipeProperties
+
+        public static readonly BindableProperty EnableSwipingProperty =
+            BindableProperty.Create(nameof(EnableSwipingProperty), typeof(bool), typeof(Calendar), false);
+
+        /// <summary>
+        /// Gets or sets if the calendar swiping is enabled.
+        /// </summary>
+        /// <value>The swiping enabled property</value>
+        public bool EnableSwiping
+        {
+            get => (bool)GetValue(EnableSwipingProperty);
+            set => SetValue(EnableSwipingProperty, value);
+        }
+
+        public static readonly BindableProperty IsSwipingAnimatedProperty =
+            BindableProperty.Create(nameof(IsSwipingAnimated), typeof(bool), typeof(Calendar), true);
+
+        /// <summary>
+        /// Gets or sets if the calendar swiping is enabled.
+        /// </summary>
+        /// <value>The swiping enabled property</value>
+        public bool IsSwipingAnimated
+        {
+            get => (bool)GetValue(IsSwipingAnimatedProperty);
+            set => SetValue(IsSwipingAnimatedProperty, value);
+        }
+
+        /// <summary>
+        /// The right swipe command for the calander navigation.
+        /// </summary>
+        /// <value>The Left swipe command</value>
+        public ICommand LeftSwipeCommand => new Command(() =>
+        {
+            ArrowExecutionSetup(true);
+            RightArrowClicked.Invoke(this, new DateTimeEventArgs {DateTime = StartDate});
+        });
+
+        /// <summary>
+        /// The right swipe command for the calendar navigation.
+        /// </summary>
+        /// <value>The Right swipe command</value>
+        public ICommand RightSwipeCommand => new Command(() =>
+        {
+            ArrowExecutionSetup(false);
+            RightArrowClicked.Invoke(this, new DateTimeEventArgs { DateTime = StartDate });
+        });
+
+        #endregion
+
         public DateTime CalendarStartDate(DateTime date)
         {
             var start = date;
