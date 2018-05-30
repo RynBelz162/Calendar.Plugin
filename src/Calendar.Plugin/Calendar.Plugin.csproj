@@ -7,10 +7,10 @@
 		<PackageId>Calendar.Plugin</PackageId>
 
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
-		<AssemblyVersion>1.0.1.0</AssemblyVersion>
-		<AssemblyFileVersion>1.0.1.0</AssemblyFileVersion>
-		<Version>1.0.1.0</Version>
-		<PackageVersion>1.0.1.0</PackageVersion>
+		<AssemblyVersion>1.0.2.0</AssemblyVersion>
+		<AssemblyFileVersion>1.0.2.0</AssemblyFileVersion>
+		<Version>1.0.2.0</Version>
+		<PackageVersion>1.0.2.0</PackageVersion>
 		<PackOnBuild>true</PackOnBuild>
 		<NeutralLanguage>en</NeutralLanguage>
 		<LangVersion>default</LangVersion>
@@ -20,7 +20,6 @@
 		<UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
 		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
 
-		<!--TODO: Fill these in-->
 		<PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
 		<PackageProjectUrl>https://github.com/RynBelz162/Calendar.Plugin</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/RynBelz162/Calendar.Plugin</RepositoryUrl>
@@ -28,7 +27,7 @@
 		<PackageIconUrl>ICON URL</PackageIconUrl>
 		<PackageTags>xamarin, ios, android, xamarin.forms, plugin, Calendar.Plugin</PackageTags>
 
-		<Title>Calendar Plugin for Xamarin and Windows</Title>
+		<Title>Calendar Plugin for Xamarin Forms</Title>
 		<Summary>Summary of nuget</Summary>
 		<Description>xamarin forms calendar control</Description>
 

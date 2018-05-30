@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -459,11 +460,26 @@ namespace Calendar.Plugin.Shared
             set => SetValue(RightArrowCommandProperty, value);
         }
 
-        protected void RightArrowClickedEvent(object s, EventArgs a)
+        protected async void RightArrowClickedEvent(object s, EventArgs a)
         {
+            if (!IsSwipingAnimated)
+            {
+                ArrowExecutionSetup(true);
+                RightArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
+                RightArrowCommand?.Execute(StartDate);
+                return;
+            }
+
+            if (IsViewAnimating(this))
+            {
+                return;
+            }
+
+            await AnimateCalendarStart(true, this);
             ArrowExecutionSetup(true);
-            RightArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
-            RightArrowCommand?.Execute(StartDate);
+            LeftArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
+            LeftArrowCommand?.Execute(StartDate);
+            await AnimateCalendarViewEnd(this);
         }
 
         #endregion
@@ -479,11 +495,26 @@ namespace Calendar.Plugin.Shared
             set => SetValue(LeftArrowCommandProperty, value);
         }
 
-        protected void LeftArrowClickedEvent(object s, EventArgs a)
+        protected async void LeftArrowClickedEvent(object s, EventArgs a)
         {
+            if (!IsSwipingAnimated)
+            {
+                ArrowExecutionSetup(false);
+                LeftArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
+                LeftArrowCommand?.Execute(StartDate);
+                return;
+            }
+
+            if (IsViewAnimating(this))
+            {
+                return;
+            }
+
+            await AnimateCalendarStart(false, this);
             ArrowExecutionSetup(false);
             LeftArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
             LeftArrowCommand?.Execute(StartDate);
+            await AnimateCalendarViewEnd(this);
         }
         #endregion
 
@@ -499,5 +530,25 @@ namespace Calendar.Plugin.Shared
                 StartDate = navigatingForwards ? date.AddMonths(ShowNumOfMonths) : date.AddMonths(-ShowNumOfMonths);
             }
         }
+
+        private static async Task AnimateCalendarStart(bool forwards, VisualElement calendar)
+        {
+            var originalX = calendar.AnchorX;
+            var offsetX = forwards ? 100 : -100;
+
+            await Task.WhenAll(
+                calendar.FadeTo(0, 250, Easing.Linear),
+                calendar.TranslateTo(originalX - offsetX, calendar.AnchorY, 250, Easing.Linear));
+        }
+
+        private static async Task AnimateCalendarViewEnd(VisualElement calendar)
+        {
+            var originalX = calendar.AnchorX;
+            await calendar.TranslateTo(originalX, calendar.AnchorY, 250, Easing.Linear);
+            await calendar.FadeTo(1, 500, Easing.Linear);
+        }
+
+        private static bool IsViewAnimating(IAnimatable calendar) =>
+            calendar.AnimationIsRunning("TranslateTo") || calendar.AnimationIsRunning("FadeTo");
     }
 }

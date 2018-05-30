@@ -408,7 +408,7 @@ namespace Calendar.Plugin.Shared
         }
 
         public static readonly BindableProperty IsSwipingAnimatedProperty =
-            BindableProperty.Create(nameof(IsSwipingAnimated), typeof(bool), typeof(Calendar), true);
+            BindableProperty.Create(nameof(IsSwipingAnimated), typeof(bool), typeof(Calendar), false);
 
         /// <summary>
         /// Gets or sets if the calendar swiping is enabled.
@@ -427,7 +427,6 @@ namespace Calendar.Plugin.Shared
         public ICommand LeftSwipeCommand => new Command(() =>
         {
             ArrowExecutionSetup(true);
-            RightArrowClicked.Invoke(this, new DateTimeEventArgs {DateTime = StartDate});
         });
 
         /// <summary>
@@ -437,7 +436,6 @@ namespace Calendar.Plugin.Shared
         public ICommand RightSwipeCommand => new Command(() =>
         {
             ArrowExecutionSetup(false);
-            RightArrowClicked.Invoke(this, new DateTimeEventArgs { DateTime = StartDate });
         });
 
         #endregion

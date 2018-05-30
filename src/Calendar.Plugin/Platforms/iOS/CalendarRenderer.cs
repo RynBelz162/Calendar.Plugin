@@ -111,17 +111,18 @@ namespace Calendar.Plugin.Platforms.iOS
             var offsetX = forwards ? 100 : -100;
 
             await Task.WhenAll(
-                calendar.FadeTo(0, 300, Easing.Linear),
-                calendar.TranslateTo(originalX - offsetX, calendar.AnchorY, 300, Easing.Linear));
+                calendar.FadeTo(0, 250, Easing.Linear),
+                calendar.TranslateTo(originalX - offsetX, calendar.AnchorY, 250, Easing.Linear));
         }
 
         private static async Task AnimateListViewEnd(VisualElement calendar)
         {
             var originalX = calendar.AnchorX;
-            await calendar.TranslateTo(originalX, calendar.AnchorY, 300, Easing.Linear);
-            await calendar.FadeTo(1, 600, Easing.Linear);
+            await calendar.TranslateTo(originalX, calendar.AnchorY, 250, Easing.Linear);
+            await calendar.FadeTo(1, 500, Easing.Linear);
         }
 
-        private static bool IsViewAnimating(IAnimatable calendar) => calendar.AnimationIsRunning("TranslateTo") || calendar.AnimationIsRunning("FadeTo");
+        private static bool IsViewAnimating(IAnimatable calendar) =>
+            calendar.AnimationIsRunning("TranslateTo") || calendar.AnimationIsRunning("FadeTo");
     }
 }
