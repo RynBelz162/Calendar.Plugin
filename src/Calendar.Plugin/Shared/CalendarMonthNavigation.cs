@@ -477,8 +477,8 @@ namespace Calendar.Plugin.Shared
 
             await AnimateCalendarStart(true, this);
             ArrowExecutionSetup(true);
-            LeftArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
-            LeftArrowCommand?.Execute(StartDate);
+            RightArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
+            RightArrowCommand?.Execute(StartDate);
             await AnimateCalendarViewEnd(this);
         }
 
