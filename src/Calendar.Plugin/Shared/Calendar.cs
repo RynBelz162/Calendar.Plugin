@@ -420,23 +420,31 @@ namespace Calendar.Plugin.Shared
             set => SetValue(IsSwipingAnimatedProperty, value);
         }
 
+        public static readonly BindableProperty LeftSwipeCommandProperty =
+            BindableProperty.Create(nameof(LeftSwipeCommand), typeof(ICommand), typeof(Calendar), null);
+
         /// <summary>
         /// The right swipe command for the calander navigation.
         /// </summary>
         /// <value>The Left swipe command</value>
-        public ICommand LeftSwipeCommand => new Command(() =>
+        public ICommand LeftSwipeCommand
         {
-            ArrowExecutionSetup(true);
-        });
+            get => (ICommand)GetValue(LeftSwipeCommandProperty);
+            set => SetValue(LeftSwipeCommandProperty, value);
+        }
+
+        public static readonly BindableProperty RightSwipeCommandProperty =
+            BindableProperty.Create(nameof(RightSwipeCommand), typeof(ICommand), typeof(Calendar), null);
 
         /// <summary>
         /// The right swipe command for the calendar navigation.
         /// </summary>
         /// <value>The Right swipe command</value>
-        public ICommand RightSwipeCommand => new Command(() =>
+        public ICommand RightSwipeCommand
         {
-            ArrowExecutionSetup(false);
-        });
+            get => (ICommand)GetValue(RightSwipeCommandProperty);
+            set => SetValue(RightSwipeCommandProperty, value);
+        }
 
         #endregion
 

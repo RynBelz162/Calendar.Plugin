@@ -88,20 +88,17 @@ namespace Calendar.Plugin.Platforms.iOS
             }
 
             var command = isSwipingRight ? calendar.RightSwipeCommand : calendar.LeftSwipeCommand;
-            if (command == null)
-            {
-                return;
-            }
-
             if (calendar.IsSwipingAnimated)
             {
                 await AnimateListViewStart(!isSwipingRight, calendar);
-                command.Execute(null);
+                calendar.ArrowExecutionSetup(!isSwipingRight);
+                command?.Execute(null);
                 await AnimateListViewEnd(calendar);
             }
             else
             {
-                command.Execute(null);
+                calendar.ArrowExecutionSetup(!isSwipingRight);
+                command?.Execute(null);
             }
         }
 

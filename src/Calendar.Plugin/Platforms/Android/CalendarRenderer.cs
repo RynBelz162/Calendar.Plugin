@@ -129,12 +129,14 @@ namespace Calendar.Plugin.Platforms.Android
             if (cal.IsSwipingAnimated)
             {
                 await AnimateCalendarStart(!isSwipingRight, cal);
-                command.Execute(null);
+                cal.ArrowExecutionSetup(!isSwipingRight);
+                command?.Execute(null);
                 await AnimateCalendarEnd(cal);
             }
             else
             {
-                command.Execute(null);
+                cal.ArrowExecutionSetup(!isSwipingRight);
+                command?.Execute(null);
             }
         }
 
