@@ -7,10 +7,10 @@
 		<PackageId>Calendar.Plugin</PackageId>
 
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
-		<AssemblyVersion>1.0.2.0</AssemblyVersion>
-		<AssemblyFileVersion>1.0.2.0</AssemblyFileVersion>
-		<Version>1.0.2.0</Version>
-		<PackageVersion>1.0.2.0</PackageVersion>
+		<AssemblyVersion>1.0.2.1</AssemblyVersion>
+		<AssemblyFileVersion>1.0.2.1</AssemblyFileVersion>
+		<Version>1.0.2.1</Version>
+		<PackageVersion>1.0.2.1</PackageVersion>
 		<PackOnBuild>true</PackOnBuild>
 		<NeutralLanguage>en</NeutralLanguage>
 		<LangVersion>default</LangVersion>
