@@ -38,7 +38,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDatesBackgroundColorOutsideMonth(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsEnabled && !b.IsSelected && b.IsOutOfMonth).ForEach(b => b.BackgroundColor = newValue);
+            _buttons.FindAll(b => b.IsEnabled && !b.IsSelected && b.IsOutOfMonth).ForEach(b => b.TintColor = newValue);
         }
 
         /// <summary>

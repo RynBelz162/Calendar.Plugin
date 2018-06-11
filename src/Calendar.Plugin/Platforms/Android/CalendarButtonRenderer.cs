@@ -22,13 +22,17 @@ namespace Calendar.Plugin.Platforms.Android
         {
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Button> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Button> e)
         {
             base.OnElementChanged(e);
             if (Control == null) return;
+            if (!(Element is CalendarButton element))
+            {
+                return;
+            }
+
             Control.TextChanged += (sender, a) =>
             {
-                var element = Element as CalendarButton;
                 if (Control.Text == element.TextWithoutMeasure || (string.IsNullOrEmpty(Control.Text) && string.IsNullOrEmpty(element.TextWithoutMeasure))) return;
                 Control.Text = element.TextWithoutMeasure;
             };
@@ -39,19 +43,23 @@ namespace Calendar.Plugin.Platforms.Android
         protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            var element = Element as CalendarButton;
+            if (!(Element is CalendarButton element))
+            {
+                return;
+            }
 
             if (e.PropertyName == nameof(element.TextWithoutMeasure) || e.PropertyName == "Renderer")
             {
                 Control.Text = element.TextWithoutMeasure;
             }
 
-            if (e.PropertyName == nameof(Element.TextColor) || e.PropertyName == "Renderer")
+            if (e.PropertyName == nameof(element.TextColor) || e.PropertyName == "Renderer")
             {
-                Control.SetTextColor(Element.TextColor.ToAndroid());
+                Control.SetTextColor(element.TextColor.ToAndroid());
             }
 
-            if (e.PropertyName == nameof(Element.BorderWidth) || e.PropertyName == nameof(Element.BorderColor) || e.PropertyName == nameof(Element.BackgroundColor) || e.PropertyName == "Renderer")
+            if (e.PropertyName == nameof(element.BorderWidth) || e.PropertyName == nameof(element.TintBorderColor)
+                                                              || e.PropertyName == nameof(element.TintColor) || e.PropertyName == "Renderer")
             {
                 if (element.BackgroundPattern == null)
                 {
@@ -59,9 +67,9 @@ namespace Calendar.Plugin.Platforms.Android
                     {
                         var drawable = new GradientDrawable();
                         drawable.SetShape(ShapeType.Rectangle);
-                        var borderWidth = (int)Math.Ceiling(Element.BorderWidth);
-                        drawable.SetStroke(borderWidth > 0 ? borderWidth + 1 : borderWidth, Element.BorderColor.ToAndroid());
-                        drawable.SetColor(Element.BackgroundColor.ToAndroid());
+                        var borderWidth = (int)Math.Ceiling(element.BorderWidth);
+                        drawable.SetStroke(borderWidth > 0 ? borderWidth + 1 : borderWidth, element.TintBorderColor.ToAndroid());
+                        drawable.SetColor(element.TintColor.ToAndroid());
                         Control.SetBackground(drawable);
                     }
                     else
@@ -89,15 +97,15 @@ namespace Calendar.Plugin.Platforms.Android
         protected async void ChangeBackgroundImage()
         {
             var element = Element as CalendarButton;
-            if (element == null || element.BackgroundImage == null) return;
+            if (element?.BackgroundImage == null) return;
 
             var d = new List<Drawable>();
             var image = await GetBitmap(element.BackgroundImage);
             d.Add(new BitmapDrawable(image));
             var drawable = new GradientDrawable();
             drawable.SetShape(ShapeType.Rectangle);
-            var borderWidth = (int)Math.Ceiling(Element.BorderWidth);
-            drawable.SetStroke(borderWidth > 0 ? borderWidth + 1 : borderWidth, Element.BorderColor.ToAndroid());
+            var borderWidth = (int)Math.Ceiling(element.BorderWidth);
+            drawable.SetStroke(borderWidth > 0 ? borderWidth + 1 : borderWidth, element.TintBorderColor.ToAndroid());
             drawable.SetColor(Color.Transparent);
             d.Add(drawable);
             var layer = new LayerDrawable(d.ToArray());
@@ -108,25 +116,20 @@ namespace Calendar.Plugin.Platforms.Android
         protected void ChangeBackgroundPattern()
         {
             var element = Element as CalendarButton;
-            if (element == null || element.BackgroundPattern == null || Control.Width == 0) return;
+            if (element?.BackgroundPattern == null || Control.Width == 0) return;
 
             var d = new List<Drawable>();
             for (var i = 0; i < element.BackgroundPattern.Pattern.Count; i++)
             {
                 var bp = element.BackgroundPattern.Pattern[i];
-                if (!string.IsNullOrEmpty(bp.Text))
-                {
-                    d.Add(new TextDrawable(bp.Color.ToAndroid()) { Pattern = bp });
-                }
-                else
-                {
-                    d.Add(new ColorDrawable(bp.Color.ToAndroid()));
-                }
+                d.Add(!string.IsNullOrEmpty(bp.Text)
+                    ? new TextDrawable(bp.Color.ToAndroid()) { Pattern = bp }
+                    : new ColorDrawable(bp.Color.ToAndroid()));
             }
             var drawable = new GradientDrawable();
             drawable.SetShape(ShapeType.Rectangle);
-            var borderWidth = (int)Math.Ceiling(Element.BorderWidth);
-            drawable.SetStroke(borderWidth > 0 ? borderWidth + 1 : borderWidth, Element.BorderColor.ToAndroid());
+            var borderWidth = (int)Math.Ceiling(element.BorderWidth);
+            drawable.SetStroke(borderWidth > 0 ? borderWidth + 1 : borderWidth, element.TintBorderColor.ToAndroid());
             drawable.SetColor(Color.Transparent);
             d.Add(drawable);
             var layer = new LayerDrawable(d.ToArray());
@@ -159,25 +162,24 @@ namespace Calendar.Plugin.Platforms.Android
 
     public class TextDrawable : ColorDrawable
     {
-        private Paint paint;
+        private readonly Paint _paint;
         public Pattern Pattern { get; set; }
 
         public TextDrawable(Color color)
             : base(color)
         {
-            paint = new Paint();
-            paint.AntiAlias = true;
-            paint.SetStyle(Paint.Style.Fill);
-            paint.TextAlign = Paint.Align.Left;
+            _paint = new Paint { AntiAlias = true };
+            _paint.SetStyle(Paint.Style.Fill);
+            _paint.TextAlign = Paint.Align.Left;
         }
 
         public override void Draw(Canvas canvas)
         {
             base.Draw(canvas);
-            paint.Color = Pattern.TextColor.ToAndroid();
-            paint.TextSize = TypedValue.ApplyDimension(ComplexUnitType.Sp, Pattern.TextSize > 0 ? Pattern.TextSize : 12, Forms.Context.Resources.DisplayMetrics);
+            _paint.Color = Pattern.TextColor.ToAndroid();
+            _paint.TextSize = TypedValue.ApplyDimension(ComplexUnitType.Sp, Pattern.TextSize > 0 ? Pattern.TextSize : 12, Forms.Context.Resources.DisplayMetrics);
             var bounds = new Rect();
-            paint.GetTextBounds(Pattern.Text, 0, Pattern.Text.Length, bounds);
+            _paint.GetTextBounds(Pattern.Text, 0, Pattern.Text.Length, bounds);
             var al = (int)Pattern.TextAlign;
             var x = Bounds.Left;
             if ((al & 2) == 2) // center
@@ -197,7 +199,7 @@ namespace Calendar.Plugin.Platforms.Android
             {
                 y = Bounds.Bottom - Math.Abs(bounds.Bottom);
             }
-            canvas.DrawText(Pattern.Text.ToCharArray(), 0, Pattern.Text.Length, x, y, paint);
+            canvas.DrawText(Pattern.Text.ToCharArray(), 0, Pattern.Text.Length, x, y, _paint);
         }
     }
 }

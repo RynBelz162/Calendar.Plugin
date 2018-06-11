@@ -29,16 +29,21 @@ namespace Calendar.Plugin.Shared
         {
             Device.BeginInvokeOnMainThread(() =>
             {
+                button.IsEnabled = special.Selectable;
+                button.IsSelected = false;
+
                 button.BackgroundPattern = special.BackgroundPattern;
                 button.BackgroundImage = special.BackgroundImage;
+
                 if (special.FontSize.HasValue) button.FontSize = special.FontSize.Value;
                 if (special.BorderWidth.HasValue) button.BorderWidth = special.BorderWidth.Value;
-                if (special.BorderColor.HasValue) button.BorderColor = special.BorderColor.Value;
-                if (special.BackgroundColor.HasValue) button.BackgroundColor = special.BackgroundColor.Value;
-                if (special.TextColor.HasValue) button.TextColor = special.TextColor.Value;
+                if (special.BackgroundColor.HasValue) button.TintColor = special.BackgroundColor.Value;
                 if (special.FontAttributes.HasValue) button.FontAttributes = special.FontAttributes.Value;
                 if (!string.IsNullOrEmpty(special.FontFamily)) button.FontFamily = special.FontFamily;
-                button.IsEnabled = special.Selectable;
+
+                button.BorderWidth = special.BorderWidth ?? BorderWidth;
+                button.TintBorderColor = special.BorderColor ?? BorderColor;
+                button.TextColor = special.TextColor ?? DatesTextColor;
             });
         }
     }

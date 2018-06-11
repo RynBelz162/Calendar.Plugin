@@ -204,12 +204,12 @@ namespace Calendar.Plugin.Shared
         }
 
         public static readonly BindableProperty TitleLeftArrowBorderColorProperty = BindableProperty.Create(nameof(TitleLeftArrowBorderColor), typeof(Color), typeof(Calendar), default(Color),
-                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleLeftArrow.BorderColor = (Color)newValue);
+                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleLeftArrow.TintBorderColor = (Color)newValue);
 
         public Color TitleLeftArrowBorderColor
         {
-            get => TitleLeftArrow.BorderColor;
-            set => TitleLeftArrow.BorderColor = value;
+            get => TitleLeftArrow.TintBorderColor;
+            set => TitleLeftArrow.TintBorderColor = value;
         }
 
         public static readonly BindableProperty TitleLeftArrowBorderRadiusProperty = BindableProperty.Create(nameof(TitleLeftArrowBorderRadius), typeof(int), typeof(Calendar), default(int),
@@ -330,12 +330,12 @@ namespace Calendar.Plugin.Shared
         }
 
         public static readonly BindableProperty TitleRightArrowBorderColorProperty = BindableProperty.Create(nameof(TitleRightArrowBorderColor), typeof(Color), typeof(Calendar), default(Color),
-                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleRightArrow.BorderColor = (Color)newValue);
+                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleRightArrow.TintBorderColor = (Color)newValue);
 
         public Color TitleRightArrowBorderColor
         {
-            get => TitleRightArrow.BorderColor;
-            set => TitleRightArrow.BorderColor = value;
+            get => TitleRightArrow.TintBorderColor;
+            set => TitleRightArrow.TintBorderColor = value;
         }
 
         public static readonly BindableProperty TitleRightArrowBorderRadiusProperty = BindableProperty.Create(nameof(TitleRightArrowBorderRadius), typeof(int), typeof(Calendar), default(int),
@@ -477,8 +477,8 @@ namespace Calendar.Plugin.Shared
 
             await AnimateCalendarStart(true, this);
             ArrowExecutionSetup(true);
-            RightArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
-            RightArrowCommand?.Execute(StartDate);
+            LeftArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
+            LeftArrowCommand?.Execute(StartDate);
             await AnimateCalendarViewEnd(this);
         }
 

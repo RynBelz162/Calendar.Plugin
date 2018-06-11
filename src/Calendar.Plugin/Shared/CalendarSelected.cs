@@ -90,7 +90,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeSelectedBorderColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsSelected).ForEach(b => b.BorderColor = newValue);
+            _buttons.FindAll(b => b.IsSelected).ForEach(b => b.TintBorderColor = newValue);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeSelectedBackgroundColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsSelected).ForEach(b => b.BackgroundColor = (newValue != Color.Default ? newValue : Color.Transparent));
+            _buttons.FindAll(b => b.IsSelected).ForEach(b => b.TintColor = (newValue != Color.Default ? newValue : Color.Transparent));
         }
 
         /// <summary>
@@ -228,8 +228,8 @@ namespace Calendar.Plugin.Shared
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                button.BackgroundPattern = special != null ? special.BackgroundPattern : null;
-                button.BackgroundImage = special != null ? special.BackgroundImage : null;
+                button.BackgroundPattern = special?.BackgroundPattern;
+                button.BackgroundImage = special?.BackgroundImage;
                 var defaultBackgroundColor = button.IsOutOfMonth ? DatesBackgroundColorOutsideMonth : DatesBackgroundColor;
                 var defaultTextColor = button.IsOutOfMonth ? DatesTextColorOutsideMonth : DatesTextColor;
                 var defaultFontAttributes = button.IsOutOfMonth ? DatesFontAttributesOutsideMonth : DatesFontAttributes;
@@ -238,8 +238,9 @@ namespace Calendar.Plugin.Shared
                 button.IsSelected = true;
                 button.FontSize = SelectedFontSize;
                 button.BorderWidth = SelectedBorderWidth;
-                button.BorderColor = SelectedBorderColor;
-                button.BackgroundColor = SelectedBackgroundColor != Color.Default ? SelectedBackgroundColor : (special != null && special.BackgroundColor.HasValue ? special.BackgroundColor.Value : defaultBackgroundColor);
+                button.TintBorderColor = SelectedBorderColor;
+                button.TintColor = SelectedBackgroundColor != Color.Default ? SelectedBackgroundColor : (special != null && special.BackgroundColor.HasValue ? special.BackgroundColor.Value : defaultBackgroundColor);
+
                 button.TextColor = SelectedTextColor != Color.Default ? SelectedTextColor : (special != null && special.TextColor.HasValue ? special.TextColor.Value : defaultTextColor);
                 button.FontAttributes = SelectedFontAttributes != FontAttributes.None ? SelectedFontAttributes : (special != null && special.FontAttributes.HasValue ? special.FontAttributes.Value : defaultFontAttributes);
                 button.FontFamily = !string.IsNullOrEmpty(SelectedFontFamily) ? SelectedFontFamily : (special != null && !string.IsNullOrEmpty(special.FontFamily) ? special.FontFamily : defaultFontFamily);
@@ -252,7 +253,9 @@ namespace Calendar.Plugin.Shared
 
             if (!MultiSelectDates)
             {
-                _buttons.FindAll(b => b.IsSelected).ForEach(b => ResetButton(b));
+                var selectedDates = _buttons.Where(b => b.IsSelected);
+                selectedDates.ForEach(ResetButton);
+
                 SelectedDates.Clear();
             }
 
@@ -267,7 +270,6 @@ namespace Calendar.Plugin.Shared
             }
             else
             {
-                SelectedDates.Add(SelectedDate.Value.Date);
                 var spD = SpecialDates?.FirstOrDefault(s => s.Date.Date == button.Date.Value.Date);
                 SetButtonSelected(button, spD);
             }
@@ -283,10 +285,13 @@ namespace Calendar.Plugin.Shared
         {
             if (b.Date.HasValue) SelectedDates.Remove(b.Date.Value.Date);
             var spD = SpecialDates?.FirstOrDefault(s => s.Date.Date == b.Date.Value.Date);
-            SetButtonNormal(b);
             if (spD != null)
             {
                 SetButtonSpecial(b, spD);
+            }
+            else
+            {
+                SetButtonNormal(b);
             }
         }
     }

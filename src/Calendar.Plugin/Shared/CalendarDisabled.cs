@@ -72,7 +72,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDisabledBorderColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.BorderColor = newValue);
+            _buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.TintBorderColor = newValue);
         }
 
         /// <summary>
@@ -213,8 +213,8 @@ namespace Calendar.Plugin.Shared
                 button.BackgroundImage = null;
                 button.FontSize = DisabledFontSize;
                 button.BorderWidth = DisabledBorderWidth;
-                button.BorderColor = DisabledBorderColor;
-                button.BackgroundColor = DisabledBackgroundColor;
+                button.TintBorderColor = DisabledBorderColor;
+                button.TintColor = DisabledBackgroundColor;
                 button.TextColor = DisabledTextColor;
                 button.FontAttributes = DisabledFontAttributes;
                 button.FontFamily = DisabledFontFamily;

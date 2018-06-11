@@ -63,5 +63,37 @@ namespace Calendar.Plugin.Shared
             set => SetValue(BackgroundImageProperty, value);
         }
 
+        public static readonly BindableProperty TintColorProperty = BindableProperty.Create(nameof(TintColor), typeof(Color), typeof(Button), Color.Default);
+        public Color TintColor
+        {
+            get => (Color)GetValue(TintColorProperty);
+            set
+            {
+                SetValue(Device.RuntimePlatform == Device.Android ? TintColorProperty : BackgroundColorProperty, value);
+                OnPropertyChanged("TintColor");
+            }
+        }
+
+        public static readonly BindableProperty TintBorderColorProperty = BindableProperty.Create(nameof(TintBorderColor), typeof(Color), typeof(Button), Color.Default);
+        public Color TintBorderColor
+        {
+            get => (Color)GetValue(TintBorderColorProperty);
+            set
+            {
+                SetValue(Device.RuntimePlatform == Device.Android ? TintBorderColorProperty : BorderColorProperty, value);
+                OnPropertyChanged("TintBorderColor");
+            }
+        }
+
+        public CalendarButton()
+        {
+            if (Device.RuntimePlatform != Device.iOS)
+            {
+                return;
+            }
+
+            BackgroundColor = TintColor;
+            BorderColor = TintBorderColor;
+        }
     }
 }

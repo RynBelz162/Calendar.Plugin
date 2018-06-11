@@ -13,7 +13,8 @@ namespace Calendar.Plugin.Shared
         private readonly List<Grid> _mainCalendars;
         private List<Label> _titleLabels;
         private readonly StackLayout _mainView;
-        private readonly StackLayout _contentView;
+
+        public readonly StackLayout _contentView;
         public static double GridSpace = 0;
         public event EventHandler<EventArgs> OnStartRenderCalendar, OnEndRenderCalendar;
 
@@ -22,7 +23,7 @@ namespace Calendar.Plugin.Shared
             TitleLeftArrow = new CalendarButton
             {
                 FontAttributes = FontAttributes.Bold,
-                BackgroundColor = Color.Transparent,
+                TintColor = Color.Transparent,
                 FontSize = 24,
                 Text = "❰",
                 TextColor = Color.FromHex("#c82727")
@@ -40,7 +41,7 @@ namespace Calendar.Plugin.Shared
             TitleRightArrow = new CalendarButton
             {
                 FontAttributes = FontAttributes.Bold,
-                BackgroundColor = Color.Transparent,
+                TintColor = Color.Transparent,
                 FontSize = 24,
                 Text = "❱",
                 TextColor = Color.FromHex("#c82727")
@@ -205,7 +206,7 @@ namespace Calendar.Plugin.Shared
         {
             if (newValue == oldValue) return;
             _mainCalendars.ForEach(obj => obj.BackgroundColor = newValue);
-            _buttons.FindAll(b => b.IsEnabled && !b.IsSelected).ForEach(b => b.BorderColor = newValue);
+            _buttons.FindAll(b => b.IsEnabled && !b.IsSelected).ForEach(b => b.TintBorderColor = newValue);
         }
 
         /// <summary>
@@ -229,7 +230,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDatesBackgroundColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsEnabled && (!b.IsSelected || SelectedBackgroundColor != Color.Default)).ForEach(b => b.BackgroundColor = newValue);
+            _buttons.FindAll(b => b.IsEnabled && (!b.IsSelected || SelectedBackgroundColor != Color.Default)).ForEach(b => b.TintColor = newValue);
         }
 
         /// <summary>
@@ -538,9 +539,9 @@ namespace Calendar.Plugin.Shared
                         {
                             BorderRadius = 0,
                             BorderWidth = BorderWidth,
-                            BorderColor = BorderColor,
+                            TintBorderColor = BorderColor,
                             FontSize = DatesFontSize,
-                            BackgroundColor = DatesBackgroundColor,
+                            TintColor = DatesBackgroundColor,
                             TextColor = DatesTextColor,
                             FontAttributes = DatesFontAttributes,
                             FontFamily = DatesFontFamily,
@@ -598,11 +599,11 @@ namespace Calendar.Plugin.Shared
 
                     if (changes.HasFlag(CalandarChanges.All))
                     {
-                        _buttons[i].Text = string.Format("{0}", start.Day);
+                        _buttons[i].Text = $"{start.Day}";
                     }
                     else
                     {
-                        _buttons[i].TextWithoutMeasure = string.Format("{0}", start.Day);
+                        _buttons[i].TextWithoutMeasure = $"{start.Day}";
                     }
                     _buttons[i].Date = start;
 
@@ -660,9 +661,10 @@ namespace Calendar.Plugin.Shared
                 button.IsSelected = false;
                 button.FontSize = DatesFontSize;
                 button.BorderWidth = BorderWidth;
-                button.BorderColor = BorderColor;
+                button.TintBorderColor = BorderColor;
                 button.FontFamily = button.IsOutOfMonth ? DatesFontFamilyOutsideMonth : DatesFontFamily;
-                button.BackgroundColor = button.IsOutOfMonth ? DatesBackgroundColorOutsideMonth : DatesBackgroundColor;
+                button.TintColor = button.IsOutOfMonth ? DatesBackgroundColorOutsideMonth : DatesBackgroundColor;
+
                 button.TextColor = button.IsOutOfMonth ? DatesTextColorOutsideMonth : DatesTextColor;
                 button.FontAttributes = button.IsOutOfMonth ? DatesFontAttributesOutsideMonth : DatesFontAttributes;
                 button.IsEnabled = ShowNumOfMonths == 1 || !button.IsOutOfMonth;
