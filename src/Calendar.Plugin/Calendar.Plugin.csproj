@@ -1,119 +1,93 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.31">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.0;netstandard2.0;MonoAndroid90;Xamarin.iOS10;</TargetFrameworks>
+    <AssemblyName>Calendar.Plugin</AssemblyName>
+    <RootNamespace>Calendar.Plugin</RootNamespace>
+    <PackageId>Calendar.Plugin</PackageId>
 
-	<PropertyGroup>
-		<TargetFrameworks>netstandard1.0;netstandard2.0;MonoAndroid80;Xamarin.iOS10;</TargetFrameworks>
-		<AssemblyName>Calendar.Plugin</AssemblyName>
-		<RootNamespace>Calendar.Plugin</RootNamespace>
-		<PackageId>Calendar.Plugin</PackageId>
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <AssemblyVersion>1.0.3</AssemblyVersion>
+    <AssemblyFileVersion>1.0.3</AssemblyFileVersion>
+    <Version>1.0.3</Version>
+    <PackageVersion>1.0.3</PackageVersion>
+    <PackOnBuild>true</PackOnBuild>
+    <NeutralLanguage>en</NeutralLanguage>
+    <LangVersion>default</LangVersion>
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
+    <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
 
-		<Product>$(AssemblyName) ($(TargetFramework))</Product>
-		<AssemblyVersion>1.0.3</AssemblyVersion>
-		<AssemblyFileVersion>1.0.3</AssemblyFileVersion>
-		<Version>1.0.3</Version>
-		<PackageVersion>1.0.3</PackageVersion>
-		<PackOnBuild>true</PackOnBuild>
-		<NeutralLanguage>en</NeutralLanguage>
-		<LangVersion>default</LangVersion>
-		<DefineConstants>$(DefineConstants);</DefineConstants>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
-		<UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
-		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/RynBelz162/Calendar.Plugin</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/RynBelz162/Calendar.Plugin</RepositoryUrl>
+    <PackageReleaseNotes>RELEASE NOTES</PackageReleaseNotes>
+    <PackageIconUrl>ICON URL</PackageIconUrl>
+    <PackageTags>xamarin, ios, android, xamarin.forms, plugin, Calendar.Plugin</PackageTags>
+    <Title>Calendar Plugin for Xamarin Forms</Title>
+    <Summary>Summary of nuget</Summary>
+    <Description>xamarin forms calendar control</Description>
 
-		<PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
-		<PackageProjectUrl>https://github.com/RynBelz162/Calendar.Plugin</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/RynBelz162/Calendar.Plugin</RepositoryUrl>
-		<PackageReleaseNotes>RELEASE NOTES</PackageReleaseNotes>
-		<PackageIconUrl>ICON URL</PackageIconUrl>
-		<PackageTags>xamarin, ios, android, xamarin.forms, plugin, Calendar.Plugin</PackageTags>
+    <Owners>Ryan Belz</Owners>
+    <Authors>Ryan Belz</Authors>
+    <Copyright>Copyright 2018</Copyright>
+  </PropertyGroup>
 
-		<Title>Calendar Plugin for Xamarin Forms</Title>
-		<Summary>Summary of nuget</Summary>
-		<Description>xamarin forms calendar control</Description>
+  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
 
-		<Owners>Ryan Belz</Owners>
-		<Authors>Ryan Belz</Authors>
-		<Copyright>Copyright 2018</Copyright>
-	</PropertyGroup>
+  <PropertyGroup Label="Android DesignTimeBuild error workaround">
+    <DesignTimeBuild>false</DesignTimeBuild>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.0" PrivateAssets="All" />
-		<PackageReference Include="Xamarin.Forms" Version="3.0.0.550146" />
-		<Compile Include="Shared\**\*.cs" />
-	</ItemGroup>
-
-	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
-	</ItemGroup>
-
-	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-	</ItemGroup>
-
-	<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
-		<Compile Include="Platforms\Android\**\*.cs" />
-	</ItemGroup>
-
-	<ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
-		<Compile Include="Platforms\iOS\**\*.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Remove="Shared\Calendar.cs" />
-	  <None Remove="Shared\CalendarButton.cs" />
-	  <None Remove="Shared\CalendarChanges.cs" />
-	  <None Remove="Shared\CalendarDisabled.cs" />
-	  <None Remove="Shared\CalendarMonthNavigation.cs" />
-	  <None Remove="Shared\CalendarMonthYearView.cs" />
-	  <None Remove="Shared\CalendarNumberOfWeek.cs" />
-	  <None Remove="Shared\CalendarOutsideMoth.cs" />
-	  <None Remove="Shared\CalendarSelected.cs" />
-	  <None Remove="Shared\CalendarSpecialDates.cs" />
-	  <None Remove="Shared\CalendarWeekdays.cs" />
-	  <None Remove="Shared\DateTimeEventArgs.cs" />
-	  <None Remove="Shared\DateTypeEnum.cs" />
-	  <None Remove="Shared\EnumerableExtensions.cs" />
-	  <None Remove="Shared\SpecialDate.cs" />
-	</ItemGroup>
-
-	<!--<ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.15063' ">
-		<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="5.2.3" />
-		<Compile Include="Platforms\UWP\**\*.cs" />
-	</ItemGroup>-->
-
-	<!--<ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.TVOS10' ">
-		<Compile Include="Platforms\TVOS\**\*.cs" />
-	</ItemGroup>-->
-
-	<!--
-	<ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.WatchOS10' ">
-		<Compile Include="Platforms\WatchOS\**\*.cs" />
-	</ItemGroup>
-	-->
-
-	<!--
-	<ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.Mac20' ">
-    <Compile Include="Platforms\macOS\**\*.cs" />
+  <ItemGroup>
+    <PackageReference Include="MSBuild.Sdk.Extras" Version="2.0.31" PrivateAssets="All" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
+    <Compile Include="Shared\**\*.cs" />
   </ItemGroup>
-	-->
 
-	<!--
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <Compile Include="Platforms\DotNet\**\*.cs" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
   </ItemGroup>
-  -->
 
-	<!--
-  <ItemGroup Condition=" '$(TargetFramework)' == 'Tizen40' ">
-    <Compile Include="Platforms\Tizen\**\*.cs" />
-    <PackageReference Include="Tizen.NET" Version="4.0.0" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
   </ItemGroup>
-  -->
 
-	<!--
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Compile Include="Platforms\DotNet\**\*.cs" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
+    <Compile Include="Platforms\Android\**\*.cs" />
   </ItemGroup>
-  -->
 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
+    <Compile Include="Platforms\iOS\**\*.cs" />
+  </ItemGroup>
 
-	<Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+  <ItemGroup>
+    <None Remove="Shared\Calendar.cs" />
+    <None Remove="Shared\CalendarButton.cs" />
+    <None Remove="Shared\CalendarChanges.cs" />
+    <None Remove="Shared\CalendarDisabled.cs" />
+    <None Remove="Shared\CalendarMonthNavigation.cs" />
+    <None Remove="Shared\CalendarMonthYearView.cs" />
+    <None Remove="Shared\CalendarNumberOfWeek.cs" />
+    <None Remove="Shared\CalendarOutsideMoth.cs" />
+    <None Remove="Shared\CalendarSelected.cs" />
+    <None Remove="Shared\CalendarSpecialDates.cs" />
+    <None Remove="Shared\CalendarWeekdays.cs" />
+    <None Remove="Shared\DateTimeEventArgs.cs" />
+    <None Remove="Shared\DateTypeEnum.cs" />
+    <None Remove="Shared\EnumerableExtensions.cs" />
+    <None Remove="Shared\SpecialDate.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>

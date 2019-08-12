@@ -17,6 +17,11 @@ namespace Calendar.Plugin.Platforms.iOS
         protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
+            if(Control == null)
+            {
+                return;
+            }
+
             var element = Element as CalendarButton;
             if (e.PropertyName == nameof(element.TextWithoutMeasure) || e.PropertyName == "Renderer")
             {
