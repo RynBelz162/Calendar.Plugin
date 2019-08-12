@@ -6,10 +6,10 @@
     <PackageId>Calendar.Plugin</PackageId>
 
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>1.0.3</AssemblyVersion>
-    <AssemblyFileVersion>1.0.3</AssemblyFileVersion>
-    <Version>1.0.3</Version>
-    <PackageVersion>1.0.3</PackageVersion>
+    <AssemblyVersion>1.0.3.1</AssemblyVersion>
+    <AssemblyFileVersion>1.0.3.1</AssemblyFileVersion>
+    <Version>1.0.3.1</Version>
+    <PackageVersion>1.0.3.1</PackageVersion>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>default</LangVersion>
@@ -27,11 +27,11 @@
     <PackageTags>xamarin, ios, android, xamarin.forms, plugin, Calendar.Plugin</PackageTags>
     <Title>Calendar Plugin for Xamarin Forms</Title>
     <Summary>Summary of nuget</Summary>
-    <Description>xamarin forms calendar control</Description>
+    <Description>Xamarin Forms calendar control</Description>
 
     <Owners>Ryan Belz</Owners>
     <Authors>Ryan Belz</Authors>
-    <Copyright>Copyright 2018</Copyright>
+    <Copyright>Copyright 2019</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
