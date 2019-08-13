@@ -43,6 +43,9 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DebugType>portable</DebugType>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard1.0|AnyCPU'">
+    <DocumentationFile />
+  </PropertyGroup>
 
   <PropertyGroup Label="Android DesignTimeBuild error workaround">
     <DesignTimeBuild>false</DesignTimeBuild>
@@ -84,6 +87,12 @@
 
   <ItemGroup>
     <None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid90'">
+    <PackageReference Include="Plugin.CurrentActivity">
+      <Version>2.1.0.4</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>

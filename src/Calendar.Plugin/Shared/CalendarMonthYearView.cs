@@ -73,7 +73,7 @@ namespace Calendar.Plugin.Shared
                 CalendarViewType = DateTypeEnum.Normal;
                 TitleLeftArrow.IsVisible = true;
                 TitleRightArrow.IsVisible = true;
-                Content = _mainView;
+                Content = mainView;
             });
         }
 
@@ -128,7 +128,7 @@ namespace Calendar.Plugin.Shared
                 CalendarViewType = DateTypeEnum.Month;
                 TitleLeftArrow.IsVisible = false;
                 TitleRightArrow.IsVisible = false;
-                Content = _mainView;
+                Content = mainView;
             });
         }
 
@@ -184,7 +184,7 @@ namespace Calendar.Plugin.Shared
                 CalendarViewType = DateTypeEnum.Year;
                 TitleLeftArrow.IsVisible = true;
                 TitleRightArrow.IsVisible = true;
-                Content = _mainView;
+                Content = mainView;
             });
         }
 

@@ -152,7 +152,7 @@ namespace Calendar.Plugin.Shared
             {
                 var calendar = (bindable as Calendar);
                 var start = calendar.CalendarStartDate(calendar.StartDate).Date;
-                for (int i = 0; i < calendar._buttons.Count; i++)
+                for (int i = 0; i < calendar.buttons.Count; i++)
                 {
                     calendar.ChangeWeekNumbers(start, i);
 
@@ -187,12 +187,12 @@ namespace Calendar.Plugin.Shared
 
         protected void ShowHideElements()
         {
-            if (_mainCalendars.Count < 1) return;
+            if (mainCalendars.Count < 1) return;
             _contentView.Children.Clear();
             _dayLabels.Clear();
             for (var i = 0; i < ShowNumOfMonths; i++)
             {
-                var main = _mainCalendars[i] as Layout;
+                var main = mainCalendars[i] as Layout;
 
                 if (ShowInBetweenMonthLabels && i > 0)
                 {
@@ -206,11 +206,11 @@ namespace Calendar.Plugin.Shared
                         HorizontalOptions = LayoutOptions.FillAndExpand,
                         Text = ""
                     };
-                    if (_titleLabels == null)
+                    if (titleLabels == null)
                     {
-                        _titleLabels = new List<Label>(ShowNumOfMonths);
+                        titleLabels = new List<Label>(ShowNumOfMonths);
                     }
-                    _titleLabels.Add(label);
+                    titleLabels.Add(label);
                     /*if (i == ShowNumOfMonths - 1)
 					{
 						MonthNavigationLayout.Children.Remove(TitleRightArrow);
@@ -234,7 +234,7 @@ namespace Calendar.Plugin.Shared
                         VerticalOptions = LayoutOptions.FillAndExpand,
                         HorizontalOptions = LayoutOptions.FillAndExpand,
                         Orientation = StackOrientation.Horizontal,
-                        Children = { _weekNumbers[i], _mainCalendars[i] }
+                        Children = { _weekNumbers[i], mainCalendars[i] }
                     };
                 }
 

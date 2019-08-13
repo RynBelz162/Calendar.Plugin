@@ -48,7 +48,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDisabledBorderWidth(int newValue, int oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.BorderWidth = newValue);
+            buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.BorderWidth = newValue);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDisabledBorderColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.TintBorderColor = newValue);
+            buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.TintBorderColor = newValue);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDisabledBackgroundColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.BackgroundColor = newValue);
+            buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.BackgroundColor = newValue);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDisabledTextColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.TextColor = newValue);
+            buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.TextColor = newValue);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDisabledFontSize(double newValue, double oldValue)
         {
             if (Math.Abs(newValue - oldValue) < 0.01) return;
-            _buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.FontSize = newValue);
+            buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.FontSize = newValue);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDisabledFontAttributes(FontAttributes newValue, FontAttributes oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.FontAttributes = newValue);
+            buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.FontAttributes = newValue);
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDisabledFontFamily(string newValue, string oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.FontFamily = newValue);
+            buttons.FindAll(b => !b.IsEnabled).ForEach(b => b.FontFamily = newValue);
         }
 
         /// <summary>

@@ -56,7 +56,7 @@ namespace Calendar.Plugin.Platforms.iOS
         {
             var element = Element as CalendarButton;
             if (element == null || element.BackgroundImage == null) return;
-            var image = await GetImage(element.BackgroundImage);
+            var image = await getImage(element.BackgroundImage);
             Control.SetBackgroundImage(image, UIControlState.Normal);
             Control.SetBackgroundImage(image, UIControlState.Disabled);
         }
@@ -90,7 +90,7 @@ namespace Calendar.Plugin.Platforms.iOS
             Control.SetBackgroundImage(image, UIControlState.Disabled);
         }
 
-        private Task<UIImage> GetImage(FileImageSource image)
+        private Task<UIImage> getImage(FileImageSource image)
         {
             var handler = new FileImageSourceHandler();
             return handler.LoadImageAsync(image);
@@ -135,7 +135,6 @@ namespace Calendar.Plugin.Platforms.iOS
     {
         public static void Init()
         {
-            var d = "";
         }
     }
 }

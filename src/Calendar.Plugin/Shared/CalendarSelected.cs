@@ -66,7 +66,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeSelectedBorderWidth(int newValue, int oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsSelected).ForEach(b => b.BorderWidth = newValue);
+            buttons.FindAll(b => b.IsSelected).ForEach(b => b.BorderWidth = newValue);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeSelectedBorderColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsSelected).ForEach(b => b.TintBorderColor = newValue);
+            buttons.FindAll(b => b.IsSelected).ForEach(b => b.TintBorderColor = newValue);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeSelectedBackgroundColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsSelected).ForEach(b => b.TintColor = (newValue != Color.Default ? newValue : Color.Transparent));
+            buttons.FindAll(b => b.IsSelected).ForEach(b => b.TintColor = (newValue != Color.Default ? newValue : Color.Transparent));
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeSelectedTextColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsSelected).ForEach(b => b.TextColor = (newValue != Color.Default ? newValue : Color.Black));
+            buttons.FindAll(b => b.IsSelected).ForEach(b => b.TextColor = (newValue != Color.Default ? newValue : Color.Black));
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeSelectedFontSize(double newValue, double oldValue)
         {
             if (Math.Abs(newValue - oldValue) < 0.01) return;
-            _buttons.FindAll(b => b.IsSelected).ForEach(b => b.FontSize = newValue);
+            buttons.FindAll(b => b.IsSelected).ForEach(b => b.FontSize = newValue);
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeSelectedFontAttributes(FontAttributes newValue, FontAttributes oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsSelected).ForEach(b => b.FontAttributes = newValue);
+            buttons.FindAll(b => b.IsSelected).ForEach(b => b.FontAttributes = newValue);
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeSelectedFontFamily(string newValue, string oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsSelected).ForEach(b => b.FontFamily = newValue);
+            buttons.FindAll(b => b.IsSelected).ForEach(b => b.FontFamily = newValue);
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace Calendar.Plugin.Shared
 
             if (!MultiSelectDates)
             {
-                var selectedDates = _buttons.Where(b => b.IsSelected);
+                var selectedDates = buttons.Where(b => b.IsSelected);
                 selectedDates.ForEach(ResetButton);
 
                 SelectedDates.Clear();
@@ -261,7 +261,7 @@ namespace Calendar.Plugin.Shared
 
             SelectedDates.Add(SelectedDate.Value.Date);
 
-            var button = _buttons.Find(b => b.Date.HasValue && b.Date.Value.Date == date.Value.Date && b.IsEnabled);
+            var button = buttons.Find(b => b.Date.HasValue && b.Date.Value.Date == date.Value.Date && b.IsEnabled);
             if (button == null) return false;
             var deselect = button.IsSelected;
             if (button.IsSelected)

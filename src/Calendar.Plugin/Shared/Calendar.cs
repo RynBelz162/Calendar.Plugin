@@ -9,10 +9,10 @@ namespace Calendar.Plugin.Shared
 {
     public partial class Calendar : ContentView
     {
-        private readonly List<CalendarButton> _buttons;
-        private readonly List<Grid> _mainCalendars;
-        private List<Label> _titleLabels;
-        private readonly StackLayout _mainView;
+        private readonly List<CalendarButton> buttons;
+        private readonly List<Grid> mainCalendars;
+        private List<Label> titleLabels;
+        private readonly StackLayout mainView;
 
         public readonly StackLayout _contentView;
         public static double GridSpace = 0;
@@ -59,7 +59,7 @@ namespace Calendar.Plugin.Shared
                 Padding = 0,
                 Orientation = StackOrientation.Vertical
             };
-            _mainView = new StackLayout
+            mainView = new StackLayout
             {
                 Padding = 0,
                 Orientation = StackOrientation.Vertical,
@@ -71,8 +71,8 @@ namespace Calendar.Plugin.Shared
             TitleRightArrow.Clicked += RightArrowClickedEvent;
             _dayLabels = new List<Label>(7);
             _weekNumberLabels = new List<Label>(6);
-            _buttons = new List<CalendarButton>(42);
-            _mainCalendars = new List<Grid>(1);
+            buttons = new List<CalendarButton>(42);
+            mainCalendars = new List<Grid>(1);
             _weekNumbers = new List<Grid>(1);
 
             CalendarViewType = DateTypeEnum.Normal;
@@ -163,7 +163,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeBorderWidth(int newValue, int oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => !b.IsSelected && b.IsEnabled).ForEach(b => b.BorderWidth = newValue);
+            buttons.FindAll(b => !b.IsSelected && b.IsEnabled).ForEach(b => b.BorderWidth = newValue);
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace Calendar.Plugin.Shared
 
         public static readonly BindableProperty OuterBorderWidthProperty =
             BindableProperty.Create(nameof(OuterBorderWidth), typeof(int), typeof(Calendar), Device.RuntimePlatform == Device.iOS ? 1 : 3,
-                                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar)._mainCalendars.ForEach(obj => obj.Padding = (int)newValue));
+                                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).mainCalendars.ForEach(obj => obj.Padding = (int)newValue));
 
         /// <summary>
         /// Gets or sets the width of the whole calandar border.
@@ -205,8 +205,8 @@ namespace Calendar.Plugin.Shared
         protected void ChangeBorderColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _mainCalendars.ForEach(obj => obj.BackgroundColor = newValue);
-            _buttons.FindAll(b => b.IsEnabled && !b.IsSelected).ForEach(b => b.TintBorderColor = newValue);
+            mainCalendars.ForEach(obj => obj.BackgroundColor = newValue);
+            buttons.FindAll(b => b.IsEnabled && !b.IsSelected).ForEach(b => b.TintBorderColor = newValue);
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDatesBackgroundColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsEnabled && (!b.IsSelected || SelectedBackgroundColor != Color.Default)).ForEach(b => b.TintColor = newValue);
+            buttons.FindAll(b => b.IsEnabled && (!b.IsSelected || SelectedBackgroundColor != Color.Default)).ForEach(b => b.TintColor = newValue);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDatesTextColor(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsEnabled && (!b.IsSelected || SelectedTextColor != Color.Default) && !b.IsOutOfMonth).ForEach(b => b.TextColor = newValue);
+            buttons.FindAll(b => b.IsEnabled && (!b.IsSelected || SelectedTextColor != Color.Default) && !b.IsOutOfMonth).ForEach(b => b.TextColor = newValue);
         }
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDatesFontAttributes(FontAttributes newValue, FontAttributes oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsEnabled && (!b.IsSelected || SelectedTextColor != Color.Default) && !b.IsOutOfMonth).ForEach(b => b.FontAttributes = newValue);
+            buttons.FindAll(b => b.IsEnabled && (!b.IsSelected || SelectedTextColor != Color.Default) && !b.IsOutOfMonth).ForEach(b => b.FontAttributes = newValue);
         }
 
         /// <summary>
@@ -302,7 +302,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDatesFontSize(double newValue, double oldValue)
         {
             if (Math.Abs(newValue - oldValue) < 0.01) return;
-            _buttons?.FindAll(b => !b.IsSelected && b.IsEnabled).ForEach(b => b.FontSize = newValue);
+            buttons?.FindAll(b => !b.IsSelected && b.IsEnabled).ForEach(b => b.FontSize = newValue);
         }
 
         /// <summary>
@@ -326,7 +326,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDatesFontFamily(string newValue, string oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons?.FindAll(b => !b.IsSelected && b.IsEnabled).ForEach(b => b.FontFamily = newValue);
+            buttons?.FindAll(b => !b.IsSelected && b.IsEnabled).ForEach(b => b.FontFamily = newValue);
         }
 
         /// <summary>
@@ -523,8 +523,8 @@ namespace Calendar.Plugin.Shared
         {
             var columDef = new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) };
             var rowDef = new RowDefinition { Height = new GridLength(1, GridUnitType.Star) };
-            _buttons.Clear();
-            _mainCalendars.Clear();
+            buttons.Clear();
+            mainCalendars.Clear();
             for (var i = 0; i < ShowNumOfMonths; i++)
             {
                 var mainCalendar = new Grid { VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand, RowSpacing = GridSpace, ColumnSpacing = GridSpace, Padding = 1, BackgroundColor = BorderColor };
@@ -535,9 +535,9 @@ namespace Calendar.Plugin.Shared
                 {
                     for (int c = 0; c < 7; c++)
                     {
-                        _buttons.Add(new CalendarButton
+                        buttons.Add(new CalendarButton
                         {
-                            BorderRadius = 0,
+                            CornerRadius = 0,
                             BorderWidth = BorderWidth,
                             TintBorderColor = BorderColor,
                             FontSize = DatesFontSize,
@@ -548,12 +548,12 @@ namespace Calendar.Plugin.Shared
                             HorizontalOptions = LayoutOptions.FillAndExpand,
                             VerticalOptions = LayoutOptions.FillAndExpand
                         });
-                        var b = _buttons.Last();
+                        var b = buttons.Last();
                         b.Clicked += DateClickedEvent;
                         mainCalendar.Children.Add(b, c, r);
                     }
                 }
-                _mainCalendars.Add(mainCalendar);
+                mainCalendars.Add(mainCalendar);
             }
         }
 
@@ -571,10 +571,10 @@ namespace Calendar.Plugin.Shared
                 if (changes.HasFlag(CalandarChanges.StartDate))
                 {
                     TitleLabel.Text = StartDate.ToString(TitleLabelFormat);
-                    if (_titleLabels != null)
+                    if (titleLabels != null)
                     {
                         var tls = StartDate.AddMonths(1);
-                        foreach (var tl in _titleLabels)
+                        foreach (var tl in titleLabels)
                         {
                             tl.Text = tls.ToString(TitleLabelFormat);
                             tls = tls.AddMonths(1);
@@ -585,7 +585,7 @@ namespace Calendar.Plugin.Shared
                 var start = CalendarStartDate(StartDate).Date;
                 var beginOfMonth = false;
                 var endOfMonth = false;
-                for (int i = 0; i < _buttons.Count; i++)
+                for (int i = 0; i < buttons.Count; i++)
                 {
                     endOfMonth |= beginOfMonth && start.Day == 1;
                     beginOfMonth |= start.Day == 1;
@@ -599,16 +599,16 @@ namespace Calendar.Plugin.Shared
 
                     if (changes.HasFlag(CalandarChanges.All))
                     {
-                        _buttons[i].Text = $"{start.Day}";
+                        buttons[i].Text = $"{start.Day}";
                     }
                     else
                     {
-                        _buttons[i].TextWithoutMeasure = $"{start.Day}";
+                        buttons[i].TextWithoutMeasure = $"{start.Day}";
                     }
-                    _buttons[i].Date = start;
+                    buttons[i].Date = start;
 
-                    _buttons[i].IsOutOfMonth = !(beginOfMonth && !endOfMonth);
-                    _buttons[i].IsEnabled = ShowNumOfMonths == 1 || !_buttons[i].IsOutOfMonth;
+                    buttons[i].IsOutOfMonth = !(beginOfMonth && !endOfMonth);
+                    buttons[i].IsEnabled = ShowNumOfMonths == 1 || !buttons[i].IsOutOfMonth;
 
                     SpecialDate sd = null;
                     if (SpecialDates != null)
@@ -616,19 +616,19 @@ namespace Calendar.Plugin.Shared
                         sd = SpecialDates.FirstOrDefault(s => s.Date.Date == start.Date);
                     }
 
-                    SetButtonNormal(_buttons[i]);
+                    SetButtonNormal(buttons[i]);
 
                     if ((MinDate.HasValue && start < MinDate) || (MaxDate.HasValue && start > MaxDate) || (DisableAllDates && sd == null))
                     {
-                        SetButtonDisabled(_buttons[i]);
+                        SetButtonDisabled(buttons[i]);
                     }
-                    else if (_buttons[i].IsEnabled && SelectedDates.Select(d => d.Date).Contains(start.Date))
+                    else if (buttons[i].IsEnabled && SelectedDates.Select(d => d.Date).Contains(start.Date))
                     {
-                        SetButtonSelected(_buttons[i], sd);
+                        SetButtonSelected(buttons[i], sd);
                     }
                     else if (sd != null)
                     {
-                        SetButtonSpecial(_buttons[i], sd);
+                        SetButtonSpecial(buttons[i], sd);
                     }
 
                     start = start.AddDays(1);
@@ -645,7 +645,7 @@ namespace Calendar.Plugin.Shared
                     TitleLeftArrow.IsEnabled = !(MinDate.HasValue && CalendarStartDate(StartDate).Date < MinDate);
                     TitleRightArrow.IsEnabled = !(MaxDate.HasValue && start > MaxDate);
                 }
-                Content = _mainView;
+                Content = mainView;
                 OnEndRenderCalendar?.Invoke(this, EventArgs.Empty);
             });
         }

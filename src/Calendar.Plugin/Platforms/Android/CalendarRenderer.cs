@@ -13,14 +13,14 @@ namespace Calendar.Plugin.Platforms.Android
     {
         // 20 degree swipe angle threshold or default to scroll funtionality
         private const float swipeAngleThreshold = 0.20f;
-        private const double DistanceThreshold = 200;
+        private const double distanceThreshold = 200;
 
-        private float _x1;
-        private float _x2;
-        private float _y1;
-        private float _y2;
-        private bool _isSwipingRight;
-        private bool _isSwipingLeft;
+        private float x1;
+        private float x2;
+        private float y1;
+        private float y2;
+        private bool isSwipingRight;
+        private bool isSwipingLeft;
 
         public CalendarRenderer(Context context) : base(context)
         {
@@ -28,57 +28,57 @@ namespace Calendar.Plugin.Platforms.Android
 
         public override bool OnTouchEvent(MotionEvent e)
         {
-            CalculateSwipe(e);
+            calculateSwipe(e);
 
-            if (!_isSwipingLeft && !_isSwipingRight)
+            if (!isSwipingLeft && !isSwipingRight)
             {
                 return true;
             }
 
-            return ExecuteSwipes();
+            return executeSwipes();
         }
 
         public override bool DispatchTouchEvent(MotionEvent e)
         {
-            CalculateSwipe(e);
+            calculateSwipe(e);
 
-            if (!_isSwipingLeft && !_isSwipingRight)
+            if (!isSwipingLeft && !isSwipingRight)
             {
                 return base.DispatchTouchEvent(e);
             }
 
-            return ExecuteSwipes();
+            return executeSwipes();
         }
 
-        private void CalculateSwipe(MotionEvent e)
+        private void calculateSwipe(MotionEvent e)
         {
             switch (e.Action)
             {
                 case MotionEventActions.Down:
-                    _x1 = e.GetX();
-                    _y1 = e.GetY();
+                    x1 = e.GetX();
+                    y1 = e.GetY();
                     break;
                 case MotionEventActions.Up:
-                    _x2 = e.GetX();
-                    _y2 = e.GetY();
+                    x2 = e.GetX();
+                    y2 = e.GetY();
 
-                    var deltaX = Math.Abs(_x2 - _x1);
-                    var deltaY = Math.Abs(_y2 - _y1);
+                    var deltaX = Math.Abs(x2 - x1);
+                    var deltaY = Math.Abs(y2 - y1);
                     var angle = Math.Atan(deltaY / deltaX);
 
-                    var distance = GetDistance(_x1, _y1, _x2, _y2);
-                    if (distance > DistanceThreshold && angle < swipeAngleThreshold)
+                    var distance = getDistance(x1, y1, x2, y2);
+                    if (distance > distanceThreshold && angle < swipeAngleThreshold)
                     {
                         // swiping right
-                        if (_x2 - _x1 > 0)
+                        if (x2 - x1 > 0)
                         {
-                            _isSwipingRight = true;
+                            isSwipingRight = true;
                         }
 
                         // swiping left
                         else
                         {
-                            _isSwipingLeft = true;
+                            isSwipingLeft = true;
                         }
                     }
 
@@ -86,41 +86,41 @@ namespace Calendar.Plugin.Platforms.Android
             }
         }
 
-        private bool ExecuteSwipes()
+        private bool executeSwipes()
         {
             if (!(Element is Shared.Calendar cal) || !cal.EnableSwiping)
             {
                 return false;
             }
 
-            if (_isSwipingLeft)
+            if (isSwipingLeft)
             {
-                SwipeCalendar(cal, false);
+                swipeCalendar(cal, false);
             }
 
-            if (_isSwipingRight)
+            if (isSwipingRight)
             {
-                SwipeCalendar(cal, true);
+                swipeCalendar(cal, true);
             }
 
-            ClearValuesAfterSwipe();
+            clearValuesAfterSwipe();
             return true;
         }
 
-        private static double GetDistance(float x1, float y1, float x2, float y2)
+        private static double getDistance(float x1, float y1, float x2, float y2)
         {
             return Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
         }
 
-        private void ClearValuesAfterSwipe()
+        private void clearValuesAfterSwipe()
         {
-            _isSwipingLeft = _isSwipingRight = false;
-            _x1 = _x2 = _y1 = _y2 = 0;
+            isSwipingLeft = isSwipingRight = false;
+            x1 = x2 = y1 = y2 = 0;
         }
 
-        private static async void SwipeCalendar(Shared.Calendar cal, bool isSwipingRight)
+        private static async void swipeCalendar(Shared.Calendar cal, bool isSwipingRight)
         {
-            if (IsViewAnimating(cal))
+            if (isViewAnimating(cal))
             {
                 return;
             }
@@ -128,10 +128,10 @@ namespace Calendar.Plugin.Platforms.Android
             var command = isSwipingRight ? cal.RightSwipeCommand : cal.LeftSwipeCommand;
             if (cal.IsSwipingAnimated)
             {
-                await AnimateCalendarStart(!isSwipingRight, cal);
+                await animateCalendarStart(!isSwipingRight, cal);
                 cal.ArrowExecutionSetup(!isSwipingRight);
                 command?.Execute(null);
-                await AnimateCalendarEnd(cal);
+                await animateCalendarEnd(cal);
             }
             else
             {
@@ -140,7 +140,7 @@ namespace Calendar.Plugin.Platforms.Android
             }
         }
 
-        private static async Task AnimateCalendarStart(bool forwards, VisualElement calendar)
+        private static async Task animateCalendarStart(bool forwards, VisualElement calendar)
         {
             var originalX = calendar.AnchorX;
             var offsetX = forwards ? 100 : -100;
@@ -150,13 +150,14 @@ namespace Calendar.Plugin.Platforms.Android
                 calendar.TranslateTo(originalX - offsetX, calendar.AnchorY, 250, Easing.Linear));
         }
 
-        private static async Task AnimateCalendarEnd(VisualElement calendar)
+        private static async Task animateCalendarEnd(VisualElement calendar)
         {
             var originalX = calendar.AnchorX;
             await calendar.TranslateTo(originalX, calendar.AnchorY, 250, Easing.Linear);
             await calendar.FadeTo(1, 500, Easing.Linear);
         }
 
-        private static bool IsViewAnimating(IAnimatable calendar) => calendar.AnimationIsRunning("TranslateTo") || calendar.AnimationIsRunning("FadeTo");
+        private static bool isViewAnimating(IAnimatable calendar)
+            => calendar.AnimationIsRunning("TranslateTo") || calendar.AnimationIsRunning("FadeTo");
     }
 }

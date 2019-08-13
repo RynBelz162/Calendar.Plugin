@@ -11,6 +11,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Color = Android.Graphics.Color;
 using Math = System.Math;
+using Plugin.CurrentActivity;
 
 [assembly: Xamarin.Forms.ExportRenderer(typeof(CalendarButton), typeof(CalendarButtonRenderer))]
 namespace Calendar.Plugin.Platforms.Android
@@ -100,8 +101,8 @@ namespace Calendar.Plugin.Platforms.Android
             if (element?.BackgroundImage == null) return;
 
             var d = new List<Drawable>();
-            var image = await GetBitmap(element.BackgroundImage);
-            d.Add(new BitmapDrawable(image));
+            var image = await getBitmap(element.BackgroundImage);
+            d.Add(new BitmapDrawable(CrossCurrentActivity.Current.Activity.Resources, image));
             var drawable = new GradientDrawable();
             drawable.SetShape(ShapeType.Rectangle);
             var borderWidth = (int)Math.Ceiling(element.BorderWidth);
@@ -145,7 +146,7 @@ namespace Calendar.Plugin.Platforms.Android
             Control.SetBackground(layer);
         }
 
-        private Task<Bitmap> GetBitmap(FileImageSource image)
+        private Task<Bitmap> getBitmap(FileImageSource image)
         {
             var handler = new FileImageSourceHandler();
             return handler.LoadImageAsync(image, this.Control.Context);
@@ -156,30 +157,29 @@ namespace Calendar.Plugin.Platforms.Android
     {
         public static void Init()
         {
-            var d = "";
         }
     }
 
     public class TextDrawable : ColorDrawable
     {
-        private readonly Paint _paint;
+        private readonly Paint paint;
         public Pattern Pattern { get; set; }
 
         public TextDrawable(Color color)
             : base(color)
         {
-            _paint = new Paint { AntiAlias = true };
-            _paint.SetStyle(Paint.Style.Fill);
-            _paint.TextAlign = Paint.Align.Left;
+            paint = new Paint { AntiAlias = true };
+            paint.SetStyle(Paint.Style.Fill);
+            paint.TextAlign = Paint.Align.Left;
         }
 
         public override void Draw(Canvas canvas)
         {
             base.Draw(canvas);
-            _paint.Color = Pattern.TextColor.ToAndroid();
-            _paint.TextSize = TypedValue.ApplyDimension(ComplexUnitType.Sp, Pattern.TextSize > 0 ? Pattern.TextSize : 12, Forms.Context.Resources.DisplayMetrics);
+            paint.Color = Pattern.TextColor.ToAndroid();
+            paint.TextSize = TypedValue.ApplyDimension(ComplexUnitType.Sp, Pattern.TextSize > 0 ? Pattern.TextSize : 12, CrossCurrentActivity.Current.Activity.Resources.DisplayMetrics);
             var bounds = new Rect();
-            _paint.GetTextBounds(Pattern.Text, 0, Pattern.Text.Length, bounds);
+            paint.GetTextBounds(Pattern.Text, 0, Pattern.Text.Length, bounds);
             var al = (int)Pattern.TextAlign;
             var x = Bounds.Left;
             if ((al & 2) == 2) // center
@@ -199,7 +199,7 @@ namespace Calendar.Plugin.Platforms.Android
             {
                 y = Bounds.Bottom - Math.Abs(bounds.Bottom);
             }
-            canvas.DrawText(Pattern.Text.ToCharArray(), 0, Pattern.Text.Length, x, y, _paint);
+            canvas.DrawText(Pattern.Text.ToCharArray(), 0, Pattern.Text.Length, x, y, paint);
         }
     }
 }

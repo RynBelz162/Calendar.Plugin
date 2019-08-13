@@ -14,7 +14,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDatesTextColorOutsideMonth(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsEnabled && !b.IsSelected && b.IsOutOfMonth).ForEach(b => b.TextColor = newValue);
+            buttons.FindAll(b => b.IsEnabled && !b.IsSelected && b.IsOutOfMonth).ForEach(b => b.TextColor = newValue);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDatesBackgroundColorOutsideMonth(Color newValue, Color oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsEnabled && !b.IsSelected && b.IsOutOfMonth).ForEach(b => b.TintColor = newValue);
+            buttons.FindAll(b => b.IsEnabled && !b.IsSelected && b.IsOutOfMonth).ForEach(b => b.TintColor = newValue);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDatesFontAttributesOutsideMonth(FontAttributes newValue, FontAttributes oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsEnabled && !b.IsSelected && b.IsOutOfMonth).ForEach(b => b.FontAttributes = newValue);
+            buttons.FindAll(b => b.IsEnabled && !b.IsSelected && b.IsOutOfMonth).ForEach(b => b.FontAttributes = newValue);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Calendar.Plugin.Shared
         protected void ChangeDatesFontFamilyOutsideMonth(string newValue, string oldValue)
         {
             if (newValue == oldValue) return;
-            _buttons.FindAll(b => b.IsEnabled && !b.IsSelected && b.IsOutOfMonth).ForEach(b => b.FontFamily = newValue);
+            buttons.FindAll(b => b.IsEnabled && !b.IsSelected && b.IsOutOfMonth).ForEach(b => b.FontFamily = newValue);
         }
 
         /// <summary>

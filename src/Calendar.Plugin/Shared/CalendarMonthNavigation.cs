@@ -13,7 +13,7 @@ namespace Calendar.Plugin.Shared
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 (bindable as Calendar).TitleLabel.HorizontalTextAlignment = (TextAlignment)newValue;
-                (bindable as Calendar)._titleLabels?.ForEach(l => l.HorizontalTextAlignment = (TextAlignment)newValue);
+                (bindable as Calendar).titleLabels?.ForEach(l => l.HorizontalTextAlignment = (TextAlignment)newValue);
             });
 
         public TextAlignment TitleLabelHorizontalTextAlignment
@@ -26,7 +26,7 @@ namespace Calendar.Plugin.Shared
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 (bindable as Calendar).TitleLabel.VerticalTextAlignment = (TextAlignment)newValue;
-                (bindable as Calendar)._titleLabels?.ForEach(l => l.VerticalTextAlignment = (TextAlignment)newValue);
+                (bindable as Calendar).titleLabels?.ForEach(l => l.VerticalTextAlignment = (TextAlignment)newValue);
             });
 
         public TextAlignment TitleLabelVerticalTextAlignment
@@ -39,7 +39,7 @@ namespace Calendar.Plugin.Shared
               propertyChanged: (bindable, oldValue, newValue) =>
               {
                   (bindable as Calendar).TitleLabel.TextColor = (Color)newValue;
-                  (bindable as Calendar)._titleLabels?.ForEach(l => l.TextColor = (Color)newValue);
+                  (bindable as Calendar).titleLabels?.ForEach(l => l.TextColor = (Color)newValue);
               });
 
         public Color TitleLabelTextColor
@@ -61,7 +61,7 @@ namespace Calendar.Plugin.Shared
            propertyChanged: (bindable, oldValue, newValue) =>
            {
                (bindable as Calendar).TitleLabel.FontFamily = (string)newValue;
-               (bindable as Calendar)._titleLabels?.ForEach(l => l.FontFamily = (string)newValue);
+               (bindable as Calendar).titleLabels?.ForEach(l => l.FontFamily = (string)newValue);
            });
 
         public string TitleLabelFontFamily
@@ -74,7 +74,7 @@ namespace Calendar.Plugin.Shared
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 (bindable as Calendar).TitleLabel.FontSize = (double)newValue;
-                (bindable as Calendar)._titleLabels?.ForEach(l => l.FontSize = (double)newValue);
+                (bindable as Calendar).titleLabels?.ForEach(l => l.FontSize = (double)newValue);
             });
 
         public double TitleLabelFontSize
@@ -87,7 +87,7 @@ namespace Calendar.Plugin.Shared
            propertyChanged: (bindable, oldValue, newValue) =>
            {
                (bindable as Calendar).TitleLabel.FontAttributes = (FontAttributes)newValue;
-               (bindable as Calendar)._titleLabels?.ForEach(l => l.FontAttributes = (FontAttributes)newValue);
+               (bindable as Calendar).titleLabels?.ForEach(l => l.FontAttributes = (FontAttributes)newValue);
            });
 
         public FontAttributes TitleLabelFontAttributes
@@ -100,7 +100,7 @@ namespace Calendar.Plugin.Shared
           propertyChanged: (bindable, oldValue, newValue) =>
           {
               (bindable as Calendar).TitleLabel.FormattedText = (FormattedString)newValue;
-              (bindable as Calendar)._titleLabels?.ForEach(l => l.FormattedText = (FormattedString)newValue);
+              (bindable as Calendar).titleLabels?.ForEach(l => l.FormattedText = (FormattedString)newValue);
           });
 
         public FormattedString TitleLabelFormattedText
@@ -113,7 +113,7 @@ namespace Calendar.Plugin.Shared
           propertyChanged: (bindable, oldValue, newValue) =>
           {
               (bindable as Calendar).TitleLabel.LineBreakMode = (LineBreakMode)newValue;
-              (bindable as Calendar)._titleLabels?.ForEach(l => l.LineBreakMode = (LineBreakMode)newValue);
+              (bindable as Calendar).titleLabels?.ForEach(l => l.LineBreakMode = (LineBreakMode)newValue);
           });
 
         public LineBreakMode TitleLabelLineBreakMode
@@ -213,21 +213,21 @@ namespace Calendar.Plugin.Shared
         }
 
         public static readonly BindableProperty TitleLeftArrowBorderRadiusProperty = BindableProperty.Create(nameof(TitleLeftArrowBorderRadius), typeof(int), typeof(Calendar), default(int),
-                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleLeftArrow.BorderRadius = (int)newValue);
+                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleLeftArrow.CornerRadius = (int)newValue);
 
         public int TitleLeftArrowBorderRadius
         {
-            get => TitleLeftArrow.BorderRadius;
-            set => TitleLeftArrow.BorderRadius = value;
+            get => TitleLeftArrow.CornerRadius;
+            set => TitleLeftArrow.CornerRadius = value;
         }
 
         public static readonly BindableProperty TitleLeftArrowImageProperty = BindableProperty.Create(nameof(TitleLeftArrowImage), typeof(FileImageSource), typeof(Calendar), default(FileImageSource),
-                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleLeftArrow.Image = (FileImageSource)newValue);
+                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleLeftArrow.ImageSource = (FileImageSource)newValue);
 
-        public FileImageSource TitleLeftArrowImage
+        public ImageSource TitleLeftArrowImage
         {
-            get => TitleLeftArrow.Image;
-            set => TitleLeftArrow.Image = value;
+            get => TitleLeftArrow.ImageSource;
+            set => TitleLeftArrow.ImageSource = value;
         }
 
         public static readonly BindableProperty TitleLeftArrowIsEnabledCoreProperty = BindableProperty.Create(nameof(TitleLeftArrowIsEnabled), typeof(bool), typeof(Calendar), default(bool),
@@ -339,21 +339,21 @@ namespace Calendar.Plugin.Shared
         }
 
         public static readonly BindableProperty TitleRightArrowBorderRadiusProperty = BindableProperty.Create(nameof(TitleRightArrowBorderRadius), typeof(int), typeof(Calendar), default(int),
-                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleRightArrow.BorderRadius = (int)newValue);
+                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleRightArrow.CornerRadius = (int)newValue);
 
         public int TitleRightArrowBorderRadius
         {
-            get => TitleRightArrow.BorderRadius;
-            set => TitleRightArrow.BorderRadius = value;
+            get => TitleRightArrow.CornerRadius;
+            set => TitleRightArrow.CornerRadius = value;
         }
 
         public static readonly BindableProperty TitleRightArrowImageProperty = BindableProperty.Create(nameof(TitleRightArrowImage), typeof(FileImageSource), typeof(Calendar), default(FileImageSource),
-                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleRightArrow.Image = (FileImageSource)newValue);
+                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleRightArrow.ImageSource = (FileImageSource)newValue);
 
-        public FileImageSource TitleRightArrowImage
+        public ImageSource TitleRightArrowImage
         {
-            get => TitleRightArrow.Image;
-            set => TitleRightArrow.Image = value;
+            get => TitleRightArrow.ImageSource;
+            set => TitleRightArrow.ImageSource = value;
         }
 
         public static readonly BindableProperty TitleRightArrowIsEnabledCoreProperty = BindableProperty.Create(nameof(TitleRightArrowIsEnabled), typeof(bool), typeof(Calendar), default(bool),
@@ -470,16 +470,16 @@ namespace Calendar.Plugin.Shared
                 return;
             }
 
-            if (IsViewAnimating(this))
+            if (isViewAnimating(this))
             {
                 return;
             }
 
-            await AnimateCalendarStart(true, this);
+            await animateCalendarStart(true, this);
             ArrowExecutionSetup(true);
             LeftArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
             LeftArrowCommand?.Execute(StartDate);
-            await AnimateCalendarViewEnd(this);
+            await animateCalendarViewEnd(this);
         }
 
         #endregion
@@ -505,16 +505,16 @@ namespace Calendar.Plugin.Shared
                 return;
             }
 
-            if (IsViewAnimating(this))
+            if (isViewAnimating(this))
             {
                 return;
             }
 
-            await AnimateCalendarStart(false, this);
+            await animateCalendarStart(false, this);
             ArrowExecutionSetup(false);
             LeftArrowClicked?.Invoke(s, new DateTimeEventArgs { DateTime = StartDate });
             LeftArrowCommand?.Execute(StartDate);
-            await AnimateCalendarViewEnd(this);
+            await animateCalendarViewEnd(this);
         }
         #endregion
 
@@ -531,7 +531,7 @@ namespace Calendar.Plugin.Shared
             }
         }
 
-        private static async Task AnimateCalendarStart(bool forwards, VisualElement calendar)
+        private static async Task animateCalendarStart(bool forwards, VisualElement calendar)
         {
             var originalX = calendar.AnchorX;
             var offsetX = forwards ? 100 : -100;
@@ -541,14 +541,14 @@ namespace Calendar.Plugin.Shared
                 calendar.TranslateTo(originalX - offsetX, calendar.AnchorY, 250, Easing.Linear));
         }
 
-        private static async Task AnimateCalendarViewEnd(VisualElement calendar)
+        private static async Task animateCalendarViewEnd(VisualElement calendar)
         {
             var originalX = calendar.AnchorX;
             await calendar.TranslateTo(originalX, calendar.AnchorY, 250, Easing.Linear);
             await calendar.FadeTo(1, 500, Easing.Linear);
         }
 
-        private static bool IsViewAnimating(IAnimatable calendar) =>
+        private static bool isViewAnimating(IAnimatable calendar) =>
             calendar.AnimationIsRunning("TranslateTo") || calendar.AnimationIsRunning("FadeTo");
     }
 }
