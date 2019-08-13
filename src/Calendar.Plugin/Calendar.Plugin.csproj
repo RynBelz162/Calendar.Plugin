@@ -6,10 +6,10 @@
     <PackageId>Calendar.Plugin</PackageId>
 
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>1.0.3.1</AssemblyVersion>
-    <AssemblyFileVersion>1.0.3.1</AssemblyFileVersion>
-    <Version>1.0.3.1</Version>
-    <PackageVersion>1.0.3.1</PackageVersion>
+    <AssemblyVersion>1.0.3.2</AssemblyVersion>
+    <AssemblyFileVersion>1.0.3.2</AssemblyFileVersion>
+    <Version>1.0.3.2</Version>
+    <PackageVersion>1.0.3.2</PackageVersion>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>default</LangVersion>
@@ -53,18 +53,14 @@
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
     <Compile Include="Shared\**\*.cs" />
   </ItemGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
   </ItemGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
   </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <Compile Include="Platforms\Android\**\*.cs" />
   </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
     <Compile Include="Platforms\iOS\**\*.cs" />
   </ItemGroup>
 
